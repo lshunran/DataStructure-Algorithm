@@ -77,8 +77,8 @@ public class BinarySearchTree {
 
         //有两个子节点时
         if(p.left != null && p.right != null){
-            BinaryTree minp = p;
-            BinaryTree minpp = p.right;
+            BinaryTree minpp = p;
+            BinaryTree minp = p.right;
             while (minp.left != null){
                 minpp = minp;
                 minp = minp.left;

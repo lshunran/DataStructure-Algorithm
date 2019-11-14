@@ -57,23 +57,39 @@ public class Heap {
 
     }
 
-    private void swap(int[] a, int p1, int p2){
+    public static void buildMaxTopHeap(int[] a, int count){
+        for (int i = count/2; i >= 1 ; --i) {
+            heapify(a, count, i);
+        }
+    }
+
+    public static void heapSort(int[] a, int count){
+        buildMaxTopHeap(a, count);
+        while(count > 1){
+            swap(a,1, count);
+            count--;
+            heapify(a, count, 1);
+        }
+    }
+
+
+    private static void swap(int[] a, int p1, int p2){
         int temp = a[p1];
         a[p1] = a[p2];
         a[p2] = temp;
     }
 
-    private void heapify(int[] a, int count, int i){
+    private static void heapify(int[] a, int count, int i){
         int pos = i;
 
         while(true){
-            if(i * 2 <= count && a[i] < a[i*2]) pos = 1*2;
+            if(i * 2 <= count && a[i] < a[i*2]) pos = i*2;
 
             if(i * 2 + 1 <= count && a[pos] < a[i*2+1]) pos = i*2+1;
 
             if(pos == i) break;
 
-            this.swap(a, pos, i);
+            swap(a, pos, i);
 
             i = pos;
 
@@ -81,15 +97,21 @@ public class Heap {
     }
 
     public static void main(String[] args) {
-        Heap maxTopHeap = new Heap(10);
+//        Heap maxTopHeap = new Heap(10);
+//
+//        maxTopHeap.insert(1);
+//        maxTopHeap.insert(2);
+//        maxTopHeap.insert(3);
+//        maxTopHeap.insert(4);
+//        maxTopHeap.insert(5);
+//        maxTopHeap.printTree();
 
-        maxTopHeap.insert(1);
-        maxTopHeap.insert(2);
-        maxTopHeap.insert(3);
-        maxTopHeap.insert(4);
-        maxTopHeap.insert(5);
-
-        maxTopHeap.printTree();
+        int[] b = {0,1,2,3,4,5};
+        Heap.buildMaxTopHeap(b, 5);
+        Heap.heapSort(b, 5);
+        for (int i = 0; i < b.length; i++) {
+            System.out.println(b[i]);
+        }
 
     }
 }
